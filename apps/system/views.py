@@ -1,25 +1,15 @@
+# __author__ : htzs
+# __time__   : 19-4-5 上午9:05
+
+
 from django.shortcuts import render
 from django.views.generic.base import View
-from .forms import LoginForm
-from django.http.response import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class IndexView(View):
+class  SystemView(LoginRequiredMixin, View):
     """
-    首页
-    """
-    def get(self, request):
-        return render(request, 'index.html')
-
-
-class LoginView(View):
-    """
-    登录
+    系统设置页
     """
     def get(self, request):
-        if not request.user.is_authenticated:
-            return render(request, 'system/users/login.html')
-        else:
-            return HttpResponseRedirect('/')
-
-
+        return render(request, 'system/system_index.html')
